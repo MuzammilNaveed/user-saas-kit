@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --background-color: #f4f5f6;
+    --white-color: #ffffff;
+    --primary-color: oklch(14.1% .004 285.83);
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Roboto", sans-serif !important;
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+.bg-primary {
+    background-color: var(--primary-color);
+}
+.background-color {
+    background-color: var(--background-color);
+}
+
+.active {
+    @apply bg-gray-200 rounded-lg;
+}
+
+.nav-link {
+    @apply flex items-center gap-3 px-3 py-2 text-sm text-gray-700 hover:bg-gray-200 rounded-lg transition-colors
+}
+
+.select2-container .select2-selection__arrow {
+    height: 41px !important;
+    margin-right: 5px !important;
+}
+
+.select2-container .selection .select2-selection{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 41px;
+    width: 100%;
+}
