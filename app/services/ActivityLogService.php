@@ -54,7 +54,7 @@ class ActivityLogService
             'subject_type'  => $this->subject ? get_class($this->subject) : null,
             'subject_id'    => optional($this->subject)->getKey(),
             'description'   => $this->description,
-            'properties'    => array_merge(['ip' => request()->ip()], $this->properties),
+            'properties'    => [...$this->properties, 'ip' => request()->ip()],
         ]);
     }
 }

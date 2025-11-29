@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Permission::class, 'user_id');
     }
+
+    public function activityLogs()
+    {
+        return $this->hasMany(ActivityLog::class, 'causer_id');
+    }
 }
