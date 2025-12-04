@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable()->index()->constrained()->onDelete('cascade');
+            $table->string('name', 255)->nullable()->index();
+            $table->integer('category')->default(0);
+            $table->string('slug', 255)->nullable();
+            $table->string('size', 255)->nullable();
+            $table->string('type', 255)->nullable();
             $table->timestamps();
         });
     }

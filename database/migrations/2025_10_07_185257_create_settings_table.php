@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable()->index()->constrained()->onDelete('cascade');
+            $table->string('section')->nullable();
+            $table->string('key')->nullable();
+            $table->json('metadata')->nullable()->default(null);
             $table->timestamps();
         });
     }

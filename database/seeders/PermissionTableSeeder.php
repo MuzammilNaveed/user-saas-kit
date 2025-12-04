@@ -50,7 +50,7 @@ class PermissionTableSeeder extends Seeder
         Permission::truncate();
         foreach ($permissions as $permission) {
             Permission::firstOrCreate(
-                ['name' => $permission, 'guard_name' => 'web']
+                ['name' => $permission, 'guard_name' => 'web', 'user_id' => 1]
             );
         }
     }

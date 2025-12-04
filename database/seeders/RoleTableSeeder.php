@@ -16,7 +16,9 @@ class RoleTableSeeder extends Seeder
         Role::truncate();
         $roles = ["Admin", "User"];
         foreach ($roles as $role) {
-            Role::firstOrCreate(['name' => $role, 'guard_name' => 'web']);
+            $createdRole = Role::firstOrCreate(['name' => $role, 'guard_name' => 'web', 'user_id' => 1]);
+            $permissions = \Spatie\Permission\Models\Permission::all();
+            $createdRole->syncPermissions($permissions);
         }
     }
 }
