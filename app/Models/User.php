@@ -61,4 +61,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(ActivityLog::class, 'causer_id');
     }
+
+    public function media()
+    {
+        return $this->morphMany(Media::class, 'mediable');
+    }
 }

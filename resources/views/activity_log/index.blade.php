@@ -6,7 +6,11 @@
     <div class="space-y-4" x-data="{ showDrawer: false, selectedLog: {} }">
         <div>
             @if ($activityLogs->isEmpty())
-            @include('components.empty')
+            @include('components.empty', [
+            'title' => 'No Activity Logs',
+            'description' => 'There are no activity logs to display.',
+            'actionUrl' => null,
+            ])
             @else
             <div class="-mx-4 mt-3 ring-1 ring-gray-300 sm:mx-0 rounded-lg overflow-hidden">
                 <table class="relative min-w-full divide-y divide-gray-300">
