@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserTableSeeder extends Seeder
 {
@@ -12,6 +14,13 @@ class UserTableSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        User::truncate();
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('password'),
+            'is_admin' => true,
+            'status'    =>  1
+        ]);
     }
 }
