@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services;
+
 use Illuminate\Support\Arr;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
@@ -13,8 +14,8 @@ class RoleService
     {
         $query = auth()->user()->is_admin ? Role::query() : auth()->user()->roles();
         return $query->when(!empty($param['search']), function ($query) use ($param) {
-                $query->where('name', database_driver(), '%' . $param['search'] . '%');
-            })
+            $query->where('name', database_driver(), '%' . $param['search'] . '%');
+        })
             ->latest('id')
             ->paginate(10);
     }
@@ -35,7 +36,7 @@ class RoleService
                 $message = auth()->user()->name . " created a new role: " . $role->name;
                 $properties = $role->toArray();
                 $properties['permissions'] = $role->permissions->pluck('name')->toArray();
-                
+
                 activity()
                     ->causedBy(auth()->user())
                     ->performedOn($role)
@@ -100,10 +101,11 @@ class RoleService
 
     private function findRole($id)
     {
-        return auth()->user()->roles()->find($id);
+        return auth()->user()->ownedRoles()->find($id);
     }
 
-    private function createRole(array $data): Role{
-        return auth()->user()->roles()->create($data);
+    private function createRole(array $data): Role
+    {
+        return auth()->user()->ownedRoles()->create($data);
     }
 }

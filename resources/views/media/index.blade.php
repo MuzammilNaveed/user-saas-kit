@@ -3,7 +3,7 @@
 @endsection
 
 <x-app-layout>
-    <div class="space-y-4" x-data="{ isOpen: false, isUrlMode: false }">
+    <div class="space-y-4 p-5" x-data="{ isOpen: false, isUrlMode: false }">
         <div class="flex flex-row items-center justify-between">
             <h1 class="text-xl font-bold tracking-tight lg:text-2xl">File Manager</h1>
             <div class="flex items-center gap-2">

@@ -3,7 +3,7 @@
 @endsection
 
 <x-app-layout>
-    <div class="space-y-4" x-data="{ showDrawer: false, selectedLog: {} }">
+    <div class="space-y-4 p-5" x-data="{ showDrawer: false, selectedLog: {} }">
         <div>
             @if ($activityLogs->isEmpty())
             @include('components.empty', [

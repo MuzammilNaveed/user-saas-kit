@@ -6,38 +6,51 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, \Spatie\Permission\Traits\HasRoles;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
+    protected $guarded = [];
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    public const STATUS = [
+        'pending'   =>  0,
+        'approved'  =>  1,
+        'blocked'   =>  2,
+    ];
+
+    public const ONBOARDING_STEPS = [
+        'basic_info'    =>  0,
+        'location'      =>  1,
+        'languages'     =>  2,
+        'skills'        =>  3,
+        'experiences'   =>  4,
+        'educations'    =>  5,
+        'completed'     =>  6
+    ];
+
+
+    protected function status(): Attribute
+    {
+        return Attribute::make(
+            get: fn(string $value) =>  array_search($value, self::STATUS),
+            set: fn(string $value) =>  self::STATUS[$value],
+        );
+    }
+
+    protected function onboardingStep(): Attribute
+    {
+        return Attribute::make(
+            get: fn(?string $value) => $value === null ? null : array_search($value, self::ONBOARDING_STEPS),
+            set: fn(?string $value) => $value === null ? null : self::ONBOARDING_STEPS[$value],
+        );
+    }
+
     protected function casts(): array
     {
         return [
@@ -46,8 +59,7 @@ class User extends Authenticatable
         ];
     }
 
-
-    public function roles()
+    public function ownedRoles()
     {
         return $this->hasMany(Role::class, 'user_id');
     }

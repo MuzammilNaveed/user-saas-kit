@@ -12,7 +12,7 @@
         name: '{{ old('name') }}',
         isLoading: false,
         nameError: false,
-    }" class="flex flex-col gap-4">
+    }" class="flex flex-col gap-4 p-5">
         <div class="space-y-2">
             <div class="flex items-center justify-between lg:hidden">
                 <h1 class="me-4 text-xl font-bold tracking-tight lg:text-2xl">{{ __('permissions.permissions') }}</h1>

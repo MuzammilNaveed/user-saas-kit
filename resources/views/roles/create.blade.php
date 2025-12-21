@@ -1,10 +1,10 @@
 @section('headerTitle')
-    {{ __('roles.add_role') }}
+{{ __('roles.add_role') }}
 @endsection
 
 <x-app-layout>
-    <div class="w-full"
-         x-data="{
+    <div class="w-full p-5"
+        x-data="{
             isLoading: false,
             name: '{{ old('name') }}',
             nameError: false,
@@ -30,7 +30,7 @@
                                     {{ __('roles.role_name') }} <span class="text-red-500">*</span>
                                 </label>
                                 <div class="mt-2">
-                                    <input type="text" name="name" id="name" 
+                                    <input type="text" name="name" id="name"
                                         x-model="name"
                                         x-ref="nameInput"
                                         @input="nameError = false"
@@ -39,7 +39,7 @@
                                         :class="nameError ? 'ring-red-500 focus:ring-red-500' : 'ring-gray-300 focus:ring-indigo-600'">
                                     <p x-show="nameError" class="text-red-500 text-xs mt-1" style="display: none;">{{ __('roles.role_name') }} {{ __('is required') }}</p>
                                     @error('name')
-                                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -60,17 +60,17 @@
                                 </div>
                                 <div class="mt-2 flex flex-wrap gap-2">
                                     @foreach($permissions as $permission)
-                                        <label class="cursor-pointer">
-                                            <input type="checkbox" name="permission_ids[]" value="{{ $permission->id }}" class="hidden peer"
-                                                @if(is_array(old('permission_ids')) && in_array($permission->id, old('permission_ids'))) checked @endif>
-                                            <div class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 peer-checked:bg-indigo-100 peer-checked:text-indigo-700 peer-checked:ring-2 peer-checked:ring-indigo-500 transition-all select-none">
-                                                {{ $permission->name }}
-                                            </div>
-                                        </label>
+                                    <label class="cursor-pointer">
+                                        <input type="checkbox" name="permission_ids[]" value="{{ $permission->id }}" class="hidden peer"
+                                            @if(is_array(old('permission_ids')) && in_array($permission->id, old('permission_ids'))) checked @endif>
+                                        <div class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 peer-checked:bg-indigo-100 peer-checked:text-indigo-700 peer-checked:ring-2 peer-checked:ring-indigo-500 transition-all select-none">
+                                            {{ $permission->name }}
+                                        </div>
+                                    </label>
                                     @endforeach
                                 </div>
                                 @error('permission_ids')
-                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>

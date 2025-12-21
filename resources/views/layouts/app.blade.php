@@ -52,7 +52,7 @@
                     </header>
 
                     <!-- Content -->
-                    <div class="p-6 space-y-6 min-h-[calc(100vh-4rem)]">
+                    <div class="space-y-6 min-h-[calc(100vh-4rem)]">
                         {{ $slot }}
                     </div>
                 </div>

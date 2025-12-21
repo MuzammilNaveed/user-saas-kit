@@ -3,7 +3,7 @@
 @endsection
 
 <x-app-layout>
-    <div class="flex flex-col gap-4"
+    <div class="flex flex-col gap-4 p-5"
         x-data="{
             showDeleteModal: false,
             roleIdToDelete: null,

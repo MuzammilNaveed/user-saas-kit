@@ -1,12 +1,13 @@
 @section('headerTitle')
-    {{ __("navigation.dashboard") }}
+{{ __("navigation.dashboard") }}
 @endsection
 
 <x-app-layout>
-    <div class="overflow-hidden rounded-md border">
-        <div
-            class="grid divide-y-1! md:grid-cols-2 md:divide-x-1! lg:grid-cols-4 lg:divide-y-0! [&*:nth-child(2)]:border-e-0! md:[&*:nth-child(2)]:border-e-0! lg:[&*:nth-child(2)]:border-e-1!">
-            @foreach (range(0, 3) as $item)
+    <div class="p-5">
+        <div class="overflow-hidden rounded-md border">
+            <div
+                class="grid divide-y-1! md:grid-cols-2 md:divide-x-1! lg:grid-cols-4 lg:divide-y-0! [&*:nth-child(2)]:border-e-0! md:[&*:nth-child(2)]:border-e-0! lg:[&*:nth-child(2)]:border-e-1!">
+                @foreach (range(0, 3) as $item)
                 <div class="flex flex-col gap-6 py-6 hover:bg-muted border-r hover:bg-gray-50 transition-colors">
                     <div
                         class="auto-rows-min gap-1.5 px-6 relative flex flex-row items-center justify-between space-y-0">
@@ -30,8 +31,9 @@
                         </p>
                     </div>
                 </div>
-            @endforeach
+                @endforeach
 
+            </div>
         </div>
     </div>
 </x-app-layout>

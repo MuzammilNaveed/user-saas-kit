@@ -15,7 +15,7 @@
             {{ __("navigation.dashboard") }}
         </a>
 
-        <a href="#" class="nav-link">
+        <a href="{{ route('users.index') }}" @class(['nav-link', 'active'=> Route::is('users.*')])>
             <x-lucide-users class="w-4 h-4 text-gray-600" />
             {{ __("navigation.users") }}
         </a>
