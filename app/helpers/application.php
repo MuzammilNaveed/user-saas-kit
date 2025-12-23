@@ -3,6 +3,7 @@
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use App\Services\SettingService;
 use Illuminate\Support\Facades\{DB, File};
 use App\Services\ActivityLogService;
 
@@ -13,6 +14,12 @@ if (! function_exists('activity')) {
     }
 }
 
+if (! function_exists('setting')) {
+    function setting($key, $default = null)
+    {
+        return SettingService::make()->get($key, $default);
+    }
+}
 
 if (!function_exists('database_driver')) {
     function database_driver()

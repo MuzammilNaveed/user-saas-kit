@@ -17,7 +17,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('media', \App\Http\Controllers\MediaController::class);
-    Route::resource('settings', \App\Http\Controllers\SettingController::class);
+    Route::resource('media', \App\Http\Controllers\MediaController::class);
+    // Route::resource('settings', \App\Http\Controllers\SettingController::class);
+    Route::get('/settings', [\App\Http\Controllers\SettingController::class, 'index'])->name('settings.index');
+    Route::put('/settings', [\App\Http\Controllers\SettingController::class, 'update'])->name('settings.update');
     Route::resource('roles', \App\Http\Controllers\RoleController::class);
     Route::resource('permissions', \App\Http\Controllers\PermissionController::class);
     Route::resource('users', \App\Http\Controllers\UserController::class);

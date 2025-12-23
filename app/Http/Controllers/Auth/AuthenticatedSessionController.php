@@ -28,6 +28,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        \App\Services\SettingService::make()->loadSettingsToSession();
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
