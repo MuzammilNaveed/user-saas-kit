@@ -175,6 +175,76 @@
                     </div>
                 </div>
 
+                <!-- Secondary Button Customization -->
+                <div x-data="{ 
+                    open: false, 
+                    bgColor: '{{ setting('appearance_secondary_color', '#6b7280') }}', 
+                    textColor: '{{ setting('appearance_secondary_button_text_color', '#ffffff') }}' 
+                }">
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4 flex flex-col items-center justify-between h-full bg-white dark:bg-gray-900">
+                        <div class="mb-4 w-full flex-1 flex items-center justify-center bg-gray-50 dark:bg-gray-800 rounded-md p-6">
+                            <button type="button" class="px-4 py-2 rounded-md font-medium shadow-sm border" x-bind:style="'background-color: ' + bgColor + '; color: ' + textColor + '; border-color: ' + bgColor + ';'">
+                                Secondary Button
+                            </button>
+                        </div>
+                        <div class="w-full">
+                            <h5 class="text-sm font-medium text-gray-900 dark:text-gray-100">Secondary Buttons</h5>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mb-3">Customize secondary button style.</p>
+                            <x-secondary-button x-on:click="open = true" class="w-full justify-center">
+                                Customize
+                            </x-secondary-button>
+                        </div>
+                    </div>
+
+                    <!-- Secondary Button Modal -->
+                    <div x-show="open" style="display: none;" class="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true">
+                        <div class="flex min-h-screen items-center justify-center p-4">
+                            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" x-on:click="open = false"></div>
+
+                            <div class="relative transform overflow-hidden rounded-lg bg-white dark:bg-gray-800 px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:w-full sm:max-w-lg sm:p-6">
+                                <div>
+                                    <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">Customize Secondary Buttons</h3>
+                                    <div class="mt-4 flex flex-col gap-6">
+                                        <!-- Live Preview -->
+                                        <div class="flex items-center justify-center p-8 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                                            <button type="button" class="px-6 py-2.5 rounded-md font-medium shadow-sm border transition-all"
+                                                x-bind:style="'background-color: ' + bgColor + '; color: ' + textColor + '; border-color: ' + bgColor + ';'">
+                                                Secondary Button Preview
+                                            </button>
+                                        </div>
+
+                                        <!-- Inputs -->
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <x-input-label :value="__('Background Color')" />
+                                                <div class="flex gap-2 mt-1">
+                                                    <input type="color" x-model="bgColor" class="h-9 w-9 p-0 border-0 rounded cursor-pointer">
+                                                    <x-text-input type="text" x-model="bgColor" class="flex-1" />
+                                                </div>
+                                                <!-- Hidden real inputs -->
+                                                <input type="hidden" name="appearance_secondary_color" x-model="bgColor">
+                                            </div>
+                                            <div>
+                                                <x-input-label :value="__('Text Color')" />
+                                                <div class="flex gap-2 mt-1">
+                                                    <input type="color" x-model="textColor" class="h-9 w-9 p-0 border-0 rounded cursor-pointer">
+                                                    <x-text-input type="text" x-model="textColor" class="flex-1" />
+                                                </div>
+                                                <input type="hidden" name="appearance_secondary_button_text_color" x-model="textColor">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-5 sm:mt-6 flex justify-end gap-2">
+                                    <x-secondary-button x-on:click="open = false">
+                                        {{ __('Done') }}
+                                    </x-secondary-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Layout Customization -->
                 <div x-data="{ 
                     open: false, 
@@ -220,7 +290,7 @@
                                                 <div class="h-2 w-2/3 bg-gray-300/30 rounded"></div>
                                             </div>
                                             <!-- Main Content -->
-                                            <div class="flex-1 h-full flex flex-col transition-colors duration-200"
+                                            <div class="flex-1 h-full flex flex-col transition-colors duration-200 rounded-tl-3xl overflow-hidden"
                                                 x-bind:style="'background-color: ' + mainColor + ';'">
                                                 <!-- Header -->
                                                 <div class="h-10 w-full border-b border-gray-200 dark:border-gray-700 bg-white/50 backdrop-blur-sm"></div>
