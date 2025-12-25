@@ -6,11 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ setting('app_name', config('app.name', 'Laravel')) }}</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <!-- Dynamic Favicon -->
+    @if(setting('app_favicon'))
+    <link rel="icon" type="image/x-icon" href="{{ Storage::url(setting('app_favicon')) }}">
+    @endif
+
+    <!-- Dynamic Font Family -->
+    @php
+    $selectedFont = setting('appearance_font', 'Inter');
+    $fontMap = [
+    'Inter' => 'Inter:wght@300;400;500;600;700',
+    'Roboto' => 'Roboto:wght@300;400;500;700',
+    'Open Sans' => 'Open+Sans:wght@300;400;600;700',
+    'Lato' => 'Lato:wght@300;400;700'
+    ];
+    $fontUrl = $fontMap[$selectedFont] ?? $fontMap['Inter'];
+    @endphp
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family={{ $fontUrl }}&display=swap" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -19,6 +35,17 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Apply Font Family -->
+    <style>
+        body {
+            font-family: '{{ $selectedFont }}',
+            system-ui,
+            -apple-system,
+            sans-serif;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -28,7 +55,6 @@
             class="fixed inset-0 bg-black bg-opacity-75 z-40 lg:hidden" @click="sidebarOpen = false"></div>
 
         @include('layouts.navigation')
-
 
         <!-- Main Content -->
         <main class="flex-1 overflow-y-auto">

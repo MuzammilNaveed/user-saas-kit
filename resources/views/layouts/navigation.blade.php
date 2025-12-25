@@ -2,8 +2,12 @@
     class="background-color fixed inset-y-0 left-0 z-50 w-64 transform -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static flex flex-col">
     <!-- Logo -->
     <div class="flex items-center gap-2 px-4 py-6">
+        @if(setting('app_logo'))
+        <img src="{{ Storage::url(setting('app_logo')) }}" alt="{{ setting('app_name', config('app.name')) }}" class="w-8 h-8 rounded-full object-cover">
+        @else
         <div class="w-6 h-6 rounded-full border-2 border-black"></div>
-        <span class="font-semibold text-base">Acme Inc.</span>
+        @endif
+        <span class="font-semibold text-base">{{ setting('app_name', config('app.name', 'Acme Inc.')) }}</span>
     </div>
 
     <!-- Navigation -->

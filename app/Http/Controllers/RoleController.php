@@ -44,7 +44,7 @@ class RoleController extends Controller
         if (isset($data['permission_ids'])) {
             $data['permissions'] = $data['permission_ids'];
         }
-        
+
         $this->roleService->createRoleWithPermissions($data);
 
         return redirect()->route('roles.index')->with('success', 'Role created successfully.');
@@ -70,7 +70,7 @@ class RoleController extends Controller
         if (isset($data['permission_ids'])) {
             $data['permissions'] = $data['permission_ids'];
         } else {
-             $data['permissions'] = [];
+            $data['permissions'] = [];
         }
 
         $this->roleService->updateRoleWithPermissions($role, $data);
@@ -86,5 +86,4 @@ class RoleController extends Controller
         $result = $this->roleService->delete($id);
         return redirect()->route('roles.index')->with($result['status_code'] === 200 ? 'success' : 'error', $result['message']);
     }
-
 }
