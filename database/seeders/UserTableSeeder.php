@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserTableSeeder extends Seeder
@@ -15,12 +16,15 @@ class UserTableSeeder extends Seeder
     public function run(): void
     {
         User::truncate();
-        User::create([
+        $user = User::create([
             'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('password'),
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('admin123'),
             'is_admin' => true,
-            'status'    =>  1
+            'status'    =>  User::APPROVED,
         ]);
+
+        $role = Role::first();
+        $user->assignRole($role);
     }
 }

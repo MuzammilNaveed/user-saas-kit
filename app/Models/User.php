@@ -7,16 +7,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Laravel\Cashier\Billable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, \Spatie\Permission\Traits\HasRoles;
+    use HasFactory, Notifiable, \Spatie\Permission\Traits\HasRoles, Billable;
 
     protected $guarded = [];
     protected $hidden = [
         'password',
         'remember_token',
     ];
+
+    public const PENDING = "pending";
+    public const APPROVED = "approved";
+    public const BLOCKED = "blocked";
 
     public const STATUS = [
         'pending'   =>  0,
@@ -77,5 +82,25 @@ class User extends Authenticatable
     public function media()
     {
         return $this->morphMany(Media::class, 'mediable');
+    }
+
+    public function userSubscription()
+    {
+        return $this->hasOne(Subscription::class)->latest();
+    }
+
+    public function userSubscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function credit()
+    {
+        return $this->hasOne(Credit::class);
+    }
+
+    public function creditTransactions()
+    {
+        return $this->hasMany(CreditTransaction::class);
     }
 }

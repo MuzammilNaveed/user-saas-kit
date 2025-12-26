@@ -25,6 +25,15 @@ Route::middleware('auth')->group(function () {
     Route::resource('permissions', \App\Http\Controllers\PermissionController::class);
     Route::resource('users', \App\Http\Controllers\UserController::class);
     Route::resource('activity_log', \App\Http\Controllers\ActivityLogController::class)->only(['index']);
+
+    // Plan Management
+    Route::resource('plans', \App\Http\Controllers\PlanController::class);
+
+    // Subscription Management
+    Route::get('/subscriptions', [\App\Http\Controllers\SubscriptionController::class, 'index'])->name('subscriptions.index');
+    Route::post('/subscriptions', [\App\Http\Controllers\SubscriptionController::class, 'store'])->name('subscriptions.store');
+    Route::put('/subscriptions/{subscription}', [\App\Http\Controllers\SubscriptionController::class, 'update'])->name('subscriptions.update');
+    Route::delete('/subscriptions/{subscription}', [\App\Http\Controllers\SubscriptionController::class, 'destroy'])->name('subscriptions.destroy');
 });
 
 require __DIR__ . '/auth.php';

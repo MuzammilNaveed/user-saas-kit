@@ -38,9 +38,15 @@
             <x-lucide-image-play class="w-4 h-4 text-gray-600" />
             {{ __("navigation.media_manager") }}
         </a>
+
         <a href="{{ route("activity_log.index") }}" @class(['nav-link', 'active'=> Route::is('activity_log.index')])>
             <x-lucide-logs class="w-4 h-4 text-gray-600" />
             {{ __("navigation.activity_logs") }}
+        </a>
+
+        <a href="{{ route("plans.index") }}" @class(['nav-link', 'active'=> Route::is('plans.*')])>
+            <x-lucide-credit-card class="w-4 h-4 text-gray-600" />
+            Plans
         </a>
     </nav>
 
