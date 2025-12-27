@@ -57,6 +57,11 @@
             {{ __("navigation.settings") }}
         </a>
 
+        <a href="{{ route("subscriptions.index") }}" @class(['nav-link', 'active'=> Route::is('subscriptions.*')])>
+            <x-lucide-sparkles class="w-4 h-4 text-gray-600" />
+            Subscriptions
+        </a>
+
         <!-- User Profile -->
         <div class="flex items-center gap-3 px-3 py-3 mt-4">
             <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-black font-medium text-sm">

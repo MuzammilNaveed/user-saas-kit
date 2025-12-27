@@ -13,14 +13,19 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        $plans = Plan::active()
+        $monthlyPlans = Plan::where('is_active', true)
+            ->where('hidden', false)
+            ->where('billing_period', 'monthly')
             ->orderBy('sort_order')
-            ->orderBy('price')
             ->get();
 
-        $userSubscription = auth()->user()->userSubscription;
+        $yearlyPlans = Plan::where('is_active', true)
+            ->where('hidden', false)
+            ->where('billing_period', 'yearly')
+            ->orderBy('sort_order')
+            ->get();
 
-        return view('subscriptions.index', compact('plans', 'userSubscription'));
+        return view('subscriptions.index', compact('monthlyPlans', 'yearlyPlans'));
     }
 
     /**
@@ -33,10 +38,6 @@ class SubscriptionController extends Controller
         ]);
 
         // TODO: Implement Stripe checkout session creation
-        return response()->json([
-            'message' => 'Stripe integration pending',
-            'plan_id' => $request->plan_id
-        ]);
     }
 
     /**

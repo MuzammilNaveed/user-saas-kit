@@ -84,16 +84,6 @@ class User extends Authenticatable
         return $this->morphMany(Media::class, 'mediable');
     }
 
-    public function userSubscription()
-    {
-        return $this->hasOne(Subscription::class)->latest();
-    }
-
-    public function userSubscriptions()
-    {
-        return $this->hasMany(Subscription::class);
-    }
-
     public function credit()
     {
         return $this->hasOne(Credit::class);

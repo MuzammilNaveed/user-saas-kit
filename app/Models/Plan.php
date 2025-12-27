@@ -19,22 +19,6 @@ class Plan extends Model
     ];
 
     /**
-     * Get the subscriptions for this plan.
-     */
-    public function subscriptions()
-    {
-        return $this->hasMany(Subscription::class);
-    }
-
-    /**
-     * Get active subscriptions for this plan.
-     */
-    public function activeSubscriptions()
-    {
-        return $this->hasMany(Subscription::class)->where('status', 'active');
-    }
-
-    /**
      * Scope for active plans only.
      */
     public function scopeActive($query)

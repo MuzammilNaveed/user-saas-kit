@@ -25,14 +25,6 @@ class CreditTransaction extends Model
     }
 
     /**
-     * Get the subscription that this transaction belongs to.
-     */
-    public function subscription()
-    {
-        return $this->belongsTo(Subscription::class);
-    }
-
-    /**
      * Get the parent referenceable model (morphable).
      */
     public function reference()
